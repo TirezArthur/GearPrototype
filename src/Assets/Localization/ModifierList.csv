@@ -1,0 +1,4 @@
+Key,Id,Shared Comments,Dutch(nl),Dutch(nl) Comments,English(en),English(en) Comments,German(de)
+ADD_HEALTH,19054575616,,Dutch,,+{Value} maximum health,,Some other translation
+INCREASE_HEALTH,78030684160,,Dutch,,{Value}% increased maximum health,,German
+INCREASE_SKILL_LVL,2.30326E+11,,Dutch,,Level up {Skill} by {Value} levels,,German
