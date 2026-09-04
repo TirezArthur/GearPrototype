@@ -47,17 +47,17 @@ public static class ServiceLocator
         else throw new InvalidOperationException("Service not recognized");
     }
 
-    public static ServiceType GetService<ServiceType>() where ServiceType : MonoBehaviour
+    public static TService GetService<TService>() where TService : MonoBehaviour
     {
-        if (_services.TryGetValue(typeof(ServiceType), out Component serviceComponent)) return serviceComponent as ServiceType;
+        if (_services.TryGetValue(typeof(TService), out Component serviceComponent)) return serviceComponent as TService;
         else throw new InvalidOperationException("Service not recognized");
     }
 
-    public static bool TryGetService<ServiceType>(out ServiceType service) where ServiceType : MonoBehaviour
+    public static bool TryGetService<TService>(out TService service) where TService : MonoBehaviour
     {
-        if (_services.TryGetValue(typeof(ServiceType), out Component serviceComponent))
+        if (_services.TryGetValue(typeof(TService), out Component serviceComponent))
         {
-            service = serviceComponent as ServiceType;
+            service = serviceComponent as TService;
             return true;
         }
         else
