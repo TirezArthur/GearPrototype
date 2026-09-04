@@ -6,9 +6,19 @@ using UnityEngine.UI;
 
 public class ItemDescriptionUI : MonoBehaviour
 {
+    [Serializable]
+    private struct BorderSettings
+    {
+        [SerializeField] public Sprite Sprite;
+        [Header("Margins")]
+        [SerializeField] public int Left;
+        [SerializeField] public int Right;
+        [SerializeField] public int Top;
+        [SerializeField] public int Bottom;
+    }
+
     [Header("Layout")]
-    [SerializeField] private Vector4 _margins = Vector4.zero;
-    [SerializeField] private EnumMapping<BorderStyle, Sprite> _borderSprites = new();
+    [SerializeField] private EnumMapping<BorderStyle, BorderSettings> _borders = new();
 
     [Header("References")]
     [SerializeField] private Image _border;
@@ -25,10 +35,9 @@ public class ItemDescriptionUI : MonoBehaviour
 
     public void SetItem(Item item)
     {
-        Sprite border = _borderSprites[item.BorderStyle];
-        if (border == null) throw new ArgumentException($"Border sprite for {item.BorderStyle} is not supported");
-        _border.sprite = border;
-        SetInnerMargins(border);
+        BorderSettings border = _borders[item.BorderStyle];
+        if (border.Sprite == null) throw new ArgumentException($"Border sprite for {item.BorderStyle} is not supported");
+        SetBorder(border);
 
         for (int modifierIndex = 0; modifierIndex < math.min(_modifiers.Length, item.Modifiers.Length); modifierIndex++)
         {
@@ -40,10 +49,12 @@ public class ItemDescriptionUI : MonoBehaviour
         }
     }
 
-    private void SetInnerMargins(Sprite backgroundSprite)
+    private void SetBorder(BorderSettings border)
     {
+        _border.sprite = border.Sprite;
+
         CanvasScaler canvasScaler = (transform as RectTransform).GetCanvasScaler();
-        int spritePPU = Mathf.FloorToInt(backgroundSprite.pixelsPerUnit);
+        int spritePPU = Mathf.FloorToInt(border.Sprite.pixelsPerUnit);
         int canvasPPU = Mathf.FloorToInt(canvasScaler.referencePixelsPerUnit);
         int pixelScale = canvasPPU / spritePPU;
 
@@ -51,11 +62,9 @@ public class ItemDescriptionUI : MonoBehaviour
         if (pixelScale * spritePPU != canvasPPU) throw new ArithmeticException("Pixels per unit of canvas are not an integer multiple of sprite pixels per unit");
 #endif
 
-        Vector4 margins = backgroundSprite.border;
-
-        _margin.padding.left = ((int)margins.x + (int)_margins.x) * pixelScale;
-        _margin.padding.bottom = ((int)margins.y + (int)_margins.y) * pixelScale;
-        _margin.padding.right = ((int)margins.z + (int)_margins.z) * pixelScale;
-        _margin.padding.top = ((int)margins.w + (int)_margins.w) * pixelScale;
+        _margin.padding.left = border.Left * pixelScale;
+        _margin.padding.bottom = border.Bottom * pixelScale;
+        _margin.padding.right = border.Right * pixelScale;
+        _margin.padding.top = border.Top * pixelScale;
     }
 }

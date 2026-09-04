@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
+using UnityEngine;
+#if UNITY_EDITOR
 using UnityEditor;
 using UnityEditorInternal;
-using UnityEngine;
+#endif
 
 [Serializable]
 public class EnumMapping<TEnum, TValue>
@@ -54,16 +56,15 @@ public class EnumMappingDrawer : PropertyDrawer
         if (valuesProp.arraySize != enumNames.Length) valuesProp.arraySize = enumNames.Length;
         if (_reorderableList == null) _reorderableList = new(property.serializedObject, valuesProp, true, false, false, false);
         _reorderableList.serializedProperty = valuesProp;
-        _reorderableList.headerHeight = 0;
         _reorderableList.footerHeight = 0;
         _reorderableList.drawElementCallback = (rect, index, active, focused) =>
         {
             rect.height = EditorGUIUtility.singleLineHeight;
-            float labelWidth = rect.width * 0.4f;
+            float labelWidth = rect.width * 0.2f;
             Rect labelRect = new Rect(rect.x, rect.y, labelWidth, rect.height);
             Rect propertyRect = new Rect(rect.x + labelWidth, rect.y, rect.width - labelWidth, rect.height);
             EditorGUI.LabelField(labelRect, enumNames[index]);
-            EditorGUI.PropertyField(propertyRect, valuesProp.GetArrayElementAtIndex(index), GUIContent.none);
+            EditorGUI.PropertyField(propertyRect, valuesProp.GetArrayElementAtIndex(index), GUIContent.none, true);
         };
         _reorderableList.elementHeightCallback = index =>
         {
@@ -82,14 +83,7 @@ public class EnumMappingDrawer : PropertyDrawer
         float height = EditorGUIUtility.singleLineHeight;
         if (!property.isExpanded) return height;
 
-        SerializedProperty valuesProp = property.FindPropertyRelative("values");
-        if (valuesProp == null) return height;
-
-        for (int index = 0; index < valuesProp.arraySize; index++)
-        {
-            SerializedProperty element = valuesProp.GetArrayElementAtIndex(index);
-            height += EditorGUI.GetPropertyHeight(element, true) + EditorGUIUtility.standardVerticalSpacing;
-        }
+        if (_reorderableList != null) height += _reorderableList.GetHeight();
 
         return height;
     }
