@@ -1,60 +1,52 @@
 using System;
+using UnityEngine;
+using UnityEngine.Localization.Settings;
 using UnityEngine.Localization.Tables;
 
 public interface IItemModifier
 {
-    public TableReference TableReference { get; }
+    public static TableReference TableReference => "ModifierList";
     public long TableEntryReference { get; }
-    public void Apply();
 }
 
+[Serializable]
 public struct AddHealthModifier : IItemModifier
 {
-    public int _value;
+    public static long _tableEntryReference = LocalizationSettings.StringDatabase.GetTableEntry(IItemModifier.TableReference, "ADD_HEALTH").Entry.KeyId;
+    [SerializeField] private int _value;
 
-    public TableReference TableReference => "ModifierList";
-    public long TableEntryReference => 19054575616;
+    public long TableEntryReference => _tableEntryReference;
     public int Value => _value;
 
     public AddHealthModifier(int value)
     {
         _value = value;
     }
-
-    public void Apply()
-    {
-        throw new System.NotImplementedException();
-    }
 }
 
 [Serializable]
 public struct IncreaseHealthModifier : IItemModifier
 {
-    private int _value;
+    public static long _tableEntryReference = LocalizationSettings.StringDatabase.GetTableEntry(IItemModifier.TableReference, "INCREASE_HEALTH").Entry.KeyId;
+    [SerializeField] private int _value;
 
-    public TableReference TableReference => "ModifierList";
-    public long TableEntryReference => 78030684160;
+    public long TableEntryReference => _tableEntryReference;
     public int Value => _value;
 
     public IncreaseHealthModifier(int value)
     {
         _value = value;
     }
-
-    public void Apply()
-    {
-        throw new System.NotImplementedException();
-    }
 }
 
 [Serializable]
 public struct IncreaseLevelModifier : IItemModifier
 {
-    private int _value;
-    private string _skill;
+    public static long _tableEntryReference = LocalizationSettings.StringDatabase.GetTableEntry(IItemModifier.TableReference, "INCREASE_SKILL_LVL").Entry.KeyId;
+    [SerializeField] private int _value;
+    [SerializeField] private string _skill;
 
-    public TableReference TableReference => "ModifierList";
-    public long TableEntryReference => 230325862400;
+    public long TableEntryReference => _tableEntryReference;
     public int Value => _value;
     public string Skill => _skill;
 
@@ -62,10 +54,5 @@ public struct IncreaseLevelModifier : IItemModifier
     {
         _skill = skill;
         _value = value;
-    }
-
-    public void Apply()
-    {
-        throw new System.NotImplementedException();
     }
 }

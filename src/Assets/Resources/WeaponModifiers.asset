@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b22889ddb3fbd948b5416a6698630c3, type: 3}
+  m_Name: WeaponModifiers
+  m_EditorClassIdentifier: Assembly-CSharp::ModifierTable
+  _weights:
+  - 1
+  - 1
+  - 1
+  _totalWeight: 3
+  _modifiers:
+  - rid: 4718670866510774358
+  - rid: 4718670866510774359
+  - rid: 4718670866510774360
+  references:
+    version: 2
+    RefIds:
+    - rid: 4718670866510774358
+      type: {class: AddHealthModifier, ns: , asm: Assembly-CSharp}
+      data:
+        _value: 0
+    - rid: 4718670866510774359
+      type: {class: IncreaseHealthModifier, ns: , asm: Assembly-CSharp}
+      data:
+        _value: 0
+    - rid: 4718670866510774360
+      type: {class: IncreaseLevelModifier, ns: , asm: Assembly-CSharp}
+      data:
+        _value: 0
+        _skill: 

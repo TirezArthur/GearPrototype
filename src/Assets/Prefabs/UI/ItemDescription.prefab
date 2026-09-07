@@ -55,18 +55,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6db27c317d3a654449ff6d54ab6bfc80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ItemDescriptionUI
-  _borders:
-    values:
-    - Sprite: {fileID: 21300000, guid: 6b381c31e3afa154f9d5f653adf321ba, type: 3}
-      Left: 4
-      Right: 4
-      Top: 4
-      Bottom: 4
-    - Sprite: {fileID: 21300000, guid: ab5b30fdaf6a6254ca41ad6907cec651, type: 3}
-      Left: 6
-      Right: 6
-      Top: 6
-      Bottom: 6
+  _itemVisualSettings: {fileID: 11400000, guid: 1701b0c96b3896440961b1f5ba19439e, type: 2}
   _border: {fileID: 6153908585713919065}
   _margin: {fileID: 2122561156717791978}
   _modifiers:

@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
+using UnityEditor;
 using UnityEngine;
 
 public class Service : MonoBehaviour
@@ -14,6 +16,12 @@ public class Service : MonoBehaviour
             Debug.LogException(new InvalidOperationException("Cannot instantiate services outside of " + nameof(ServiceLocator)));
         }
     }
+
+    // Fires after all Services have been instantiated, to be used when code relies on other Services 
+    public virtual void Setup()
+    {
+
+    }
 }
 
 public static class ServiceLocator
@@ -24,20 +32,27 @@ public static class ServiceLocator
     private static void Setup()
     {
         _services.Clear();
+
         Type[] serviceTypes = typeof(ServiceLocator).Assembly
             .GetTypes()
-            .Where(type => typeof(Service).IsAssignableFrom(type) && type != typeof(Service) )
+            .Where(type => typeof(Service).IsAssignableFrom(type) && type != typeof(Service))
             .ToArray();
 
-        foreach(Type service in serviceTypes)
+        foreach (Type service in serviceTypes)
         {
+            if (service.IsGenericType || service.IsAbstract) continue; // Only consider actual implementations, not abstract classes
             if (!service.IsSealed) throw new InvalidOperationException("Service has to be a sealed class");
-            if (service.IsGenericType || service.IsAbstract) throw new InvalidOperationException("Service must have a concrete implementation");
 
             GameObject serviceObject = new GameObject(service.Name);
             GameObject.DontDestroyOnLoad(serviceObject);
             Component serviceComponent = serviceObject.AddComponent(service);
             _services[service] = serviceComponent;
+        }
+
+        foreach (Component service in _services.Values)
+        {
+            MethodInfo setup = service.GetType().GetMethod(nameof(Service.Setup), BindingFlags.Public | BindingFlags.Instance);
+            setup.Invoke(service, null);
         }
     }
 
@@ -47,13 +62,13 @@ public static class ServiceLocator
         else throw new InvalidOperationException("Service not recognized");
     }
 
-    public static TService GetService<TService>() where TService : MonoBehaviour
+    public static TService GetService<TService>() where TService : Service
     {
         if (_services.TryGetValue(typeof(TService), out Component serviceComponent)) return serviceComponent as TService;
         else throw new InvalidOperationException("Service not recognized");
     }
 
-    public static bool TryGetService<TService>(out TService service) where TService : MonoBehaviour
+    public static bool TryGetService<TService>(out TService service) where TService : Service
     {
         if (_services.TryGetValue(typeof(TService), out Component serviceComponent))
         {

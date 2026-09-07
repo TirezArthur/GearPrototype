@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b78b518827b072f4fae6bcc8bb83452d, type: 3}
+  m_Name: ItemVisualSettings
+  m_EditorClassIdentifier: Assembly-CSharp::ItemVisualSettings
+  _borders:
+    values:
+    - Sprite: {fileID: 21300000, guid: 6b381c31e3afa154f9d5f653adf321ba, type: 3}
+      Left: 4
+      Right: 4
+      Top: 4
+      Bottom: 4
+    - Sprite: {fileID: 21300000, guid: ab5b30fdaf6a6254ca41ad6907cec651, type: 3}
+      Left: 6
+      Right: 6
+      Top: 6
+      Bottom: 6
+  _rarityColors:
+    values:
+    - {r: 0.48627454, g: 0.48627454, b: 0.54509807, a: 1}
+    - {r: 0.078431375, g: 0.627451, b: 0.18039216, a: 1}
+    - {r: 0.15686275, g: 0.36078432, b: 0.7686275, a: 1}
+    - {r: 0.47450984, g: 0.227451, b: 0.5019608, a: 1}
+    - {r: 0.97647065, g: 0.6392157, b: 0.10588236, a: 1}
