@@ -27,6 +27,7 @@ public class ItemDescriptionUI : MonoBehaviour
             {
                 localizeStringEvent.StringReference.Arguments = new[] { modifier };
                 localizeStringEvent.StringReference.SetReference(IItemModifier.TableReference, modifier.TableEntryReference);
+                localizeStringEvent.RefreshString();
             }
             else
             {

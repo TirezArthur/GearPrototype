@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using UnityEditor;
 using UnityEngine;
 
 public class Service : MonoBehaviour
@@ -17,7 +16,7 @@ public class Service : MonoBehaviour
         }
     }
 
-    // Fires after all Services have been instantiated, to be used when code relies on other Services 
+    // Fires after all Services have been instantiated, to be used when code relies on other Services
     public virtual void Setup()
     {
 
@@ -52,7 +51,7 @@ public static class ServiceLocator
         foreach (Component service in _services.Values)
         {
             MethodInfo setup = service.GetType().GetMethod(nameof(Service.Setup), BindingFlags.Public | BindingFlags.Instance);
-            setup.Invoke(service, null);
+            setup?.Invoke(service, null);
         }
     }
 

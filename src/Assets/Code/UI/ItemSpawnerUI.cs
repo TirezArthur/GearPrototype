@@ -3,7 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ItemSpawner : MonoBehaviour
+public class ItemSpawnerUI : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private ItemVisualSettings _itemVisualSettings;

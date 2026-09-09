@@ -18,22 +18,22 @@ MonoBehaviour:
   - 1
   _totalWeight: 3
   _modifiers:
-  - rid: 4718670866510774358
-  - rid: 4718670866510774359
+  - rid: 4718670920684929077
+  - rid: 4718670920684929080
   - rid: 4718670866510774360
   references:
     version: 2
     RefIds:
-    - rid: 4718670866510774358
-      type: {class: AddHealthModifier, ns: , asm: Assembly-CSharp}
-      data:
-        _value: 0
-    - rid: 4718670866510774359
-      type: {class: IncreaseHealthModifier, ns: , asm: Assembly-CSharp}
-      data:
-        _value: 0
     - rid: 4718670866510774360
       type: {class: IncreaseLevelModifier, ns: , asm: Assembly-CSharp}
       data:
-        _value: 0
-        _skill: 
+        _value: 1
+        _skill: Fireball
+    - rid: 4718670920684929077
+      type: {class: AddHealthModifier, ns: , asm: Assembly-CSharp}
+      data:
+        _value: 40
+    - rid: 4718670920684929080
+      type: {class: IncreaseHealthModifier, ns: , asm: Assembly-CSharp}
+      data:
+        _value: 15

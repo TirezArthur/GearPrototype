@@ -1,9 +1,10 @@
 using System;
+using System.Linq;
 using UnityEditor;
 using UnityEditor.IMGUI.Controls;
 using UnityEditorInternal;
 using UnityEngine;
-using System.Linq;
+using UnityEngine.Localization.PropertyVariants.TrackedProperties;
 
 [CustomEditor(typeof(ModifierTable))]
 public class ModifierTableEditor : Editor
@@ -38,6 +39,7 @@ public class ModifierTableEditor : Editor
         _list.onAddCallback = OnAdd;
         _list.onRemoveCallback = OnRemove;
         _list.onReorderCallbackWithDetails = OnReorder;
+        _list.elementHeightCallback = GetElementHeight;
 
         UpdateStats();
     }
@@ -66,14 +68,33 @@ public class ModifierTableEditor : Editor
             TypeDropdown dropdown = new TypeDropdown(_dropdownState, _modifierTypes, selectedType =>
             {
                 serializedObject.Update();
-                SerializedProperty element = _modifiersProp.GetArrayElementAtIndex(index);
-                element.managedReferenceValue = selectedType != null
+                modifierElement.managedReferenceValue = selectedType != null
                     ? Activator.CreateInstance(selectedType)
                     : null;
                 serializedObject.ApplyModifiedProperties();
             });
             dropdown.Show(modifierRect);
         }
+
+        // Unsure about how the modifiers should be configured, use this code if the objects themselves serialize max values
+        //if (modifierElement.managedReferenceValue == null) return;
+
+        //modifierRect.y += EditorGUIUtility.singleLineHeight;
+        //float height = EditorGUI.GetPropertyHeight(modifierElement, true);
+        //rect.height += height;
+        //modifierRect.height = height;
+        //EditorGUI.PropertyField(modifierRect, modifierElement, true);
+    }
+
+    private float GetElementHeight(int index)
+    {
+        float height = EditorGUIUtility.singleLineHeight;
+
+        //SerializedProperty modifierElement = _modifiersProp.GetArrayElementAtIndex(index);
+        //if (modifierElement.managedReferenceValue != null)
+        //    height += EditorGUI.GetPropertyHeight(modifierElement, true);
+
+        return height;
     }
 
     private void OnAdd(ReorderableList list)
