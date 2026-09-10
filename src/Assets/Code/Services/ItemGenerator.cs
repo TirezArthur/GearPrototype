@@ -13,12 +13,32 @@ public sealed class ItemGenerator : Service
         base.Awake();
         _weaponModifiers = Resources.Load<ModifierTable>("WeaponModifiers");
         _randomState = new Random((uint)UnityEngine.Random.Range(int.MinValue, int.MaxValue));
+
+        string test = LocalizationFormatter.PreProcess("Test: {Value}");
+        string result = string.Format(new LocalizationFormatter(), test, new AddHealthModifier());
+
+        test = LocalizationFormatter.PreProcess("Test: {{{0}}}");
+        result = string.Format(new LocalizationFormatter(), test, new AddHealthModifier());
+
+        test = LocalizationFormatter.PreProcess("Test: {0.Value}");
+        result = string.Format(new LocalizationFormatter(), test, new AddHealthModifier());
+
+        test = LocalizationFormatter.PreProcess("Test: {0:Value}");
+        result = string.Format(new LocalizationFormatter(), test, new AddHealthModifier());
+
+        test = LocalizationFormatter.PreProcess("Test: {{{Value}}}");
+        result = string.Format(new LocalizationFormatter(), test, new AddHealthModifier());
+
+        test = LocalizationFormatter.PreProcess("Test: {{{{{Value}}}}}");
+        result = string.Format(new LocalizationFormatter(), test, new AddHealthModifier());
+
+        test = LocalizationFormatter.PreProcess("Test: {{ {{{Value}}} }}");
+        result = string.Format(new LocalizationFormatter(), test, new AddHealthModifier());
     }
 
     // TODO cleanup this mess when more item types are supported
     public Item GenerateItem(Rarity rarity)
     {
-        Debug.Log(string.Format("Generating Item with {0}: {1}", nameof(Rarity), rarity));
         Item item = new();
         item.Rarity = rarity;
         item.BorderType = BorderType.Default;
@@ -59,7 +79,6 @@ public sealed class ItemGenerator : Service
         IItemModifier modifier = null;
         do modifier = _weaponModifiers.GetModifier(ref _randomState);
         while (modifierArray.Any(existing => existing != null && existing.GetType() == modifier.GetType()));
-        Debug.Log(string.Format("Generated mod {0} with random state: {1}", modifier, _randomState.state));
         modifier.Randomize(ref _randomState);
         modifierArray[index] = modifier;
     }

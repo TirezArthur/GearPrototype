@@ -42,16 +42,35 @@ public static class ServiceLocator
             if (service.IsGenericType || service.IsAbstract) continue; // Only consider actual implementations, not abstract classes
             if (!service.IsSealed) throw new InvalidOperationException("Service has to be a sealed class");
 
-            GameObject serviceObject = new GameObject(service.Name);
-            GameObject.DontDestroyOnLoad(serviceObject);
-            Component serviceComponent = serviceObject.AddComponent(service);
-            _services[service] = serviceComponent;
+            try
+            {
+                GameObject serviceObject = new GameObject(service.Name);
+                GameObject.DontDestroyOnLoad(serviceObject);
+                Component serviceComponent = serviceObject.AddComponent(service);
+                _services[service] = serviceComponent;
+            }
+            catch (Exception exception)
+            {
+                Debug.LogException(exception);
+                Debug.LogError(string.Format("Could not instantiate {0}: {1}", nameof(Service), service));
+                _services.Remove(service);
+            }
         }
 
         foreach (Component service in _services.Values)
         {
-            MethodInfo setup = service.GetType().GetMethod(nameof(Service.Setup), BindingFlags.Public | BindingFlags.Instance);
-            setup?.Invoke(service, null);
+            try
+            {
+                MethodInfo setup = service.GetType().GetMethod(nameof(Service.Setup), BindingFlags.Public | BindingFlags.Instance);
+                setup?.Invoke(service, null);
+            }
+            catch (Exception exception)
+            {
+                Debug.LogException(exception);
+                Type serviceType = service.GetType();
+                GameObject.Destroy(_services[serviceType].gameObject);
+                _services.Remove(serviceType);
+            }
         }
     }
 

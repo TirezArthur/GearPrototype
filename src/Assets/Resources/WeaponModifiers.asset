@@ -27,13 +27,16 @@ MonoBehaviour:
     - rid: 4718670866510774360
       type: {class: IncreaseLevelModifier, ns: , asm: Assembly-CSharp}
       data:
-        _value: 1
+        _value:
+          _value: 0.0577178
         _skill: Fireball
     - rid: 4718670920684929077
       type: {class: AddHealthModifier, ns: , asm: Assembly-CSharp}
       data:
-        _value: 40
+        _value:
+          _value: 0.29579735
     - rid: 4718670920684929080
       type: {class: IncreaseHealthModifier, ns: , asm: Assembly-CSharp}
       data:
-        _value: 15
+        _value:
+          _value: 0.8270235

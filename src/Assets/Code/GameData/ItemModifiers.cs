@@ -23,7 +23,6 @@ public struct AddHealthModifier : IItemModifier
     public void Randomize(ref Random random)
     {
         _value.Randomize(ref random);
-        Debug.Log(string.Format("Randomized mod value {{{0}}} with random state: {1}", _value.Value, random.state));
     }
 
     void ISerializationCallbackReceiver.OnBeforeSerialize()
@@ -47,7 +46,6 @@ public struct IncreaseHealthModifier : IItemModifier
     public void Randomize(ref Random random)
     {
         _value.Randomize(ref random);
-        Debug.Log(string.Format("Randomized mod value {{{0}}} with random state: {1}", _value.Value, random.state));
     }
 
     void ISerializationCallbackReceiver.OnBeforeSerialize()
@@ -73,7 +71,8 @@ public struct IncreaseLevelModifier : IItemModifier
     public void Randomize(ref Random random)
     {
         _value.Randomize(ref random);
-        Debug.Log(string.Format("Randomized mod value {{{0}}} with random state: {1}", _value.Value, random.state));
+
+        object obj = random;
     }
 
     void ISerializationCallbackReceiver.OnBeforeSerialize()
