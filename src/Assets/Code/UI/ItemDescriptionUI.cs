@@ -9,7 +9,7 @@ public class ItemDescriptionUI : MonoBehaviour
     [Header("References")]
     [SerializeField] private Image _border;
     [SerializeField] private VerticalLayoutGroup _margin;
-    [SerializeField] private TextMeshProUGUI[] _modifiers = new TextMeshProUGUI[3];
+    [SerializeField] private StringLocalizer[] _modifiers = new StringLocalizer[3];
 
     public void SetItem(Item item)
     {
@@ -19,19 +19,19 @@ public class ItemDescriptionUI : MonoBehaviour
 
         for (int modifierIndex = 0; modifierIndex < _modifiers.Length; modifierIndex++)
         {
-            //LocalizeStringEvent localizeStringEvent = _modifiers[modifierIndex];
+            StringLocalizer localizeStringEvent = _modifiers[modifierIndex];
             IItemModifier modifier = modifierIndex < item.Modifiers.Length ? item.Modifiers[modifierIndex] : null;
 
             if (modifier != null)
             {
-                //localizeStringEvent.StringReference.Arguments = new[] { modifier };
-                //localizeStringEvent.StringReference.SetReference(IItemModifier.TableReference, modifier.TableEntryReference);
-                //localizeStringEvent.RefreshString();
+                localizeStringEvent.SetArguments(modifier);
+                localizeStringEvent.SetStringReference("Modifiers", modifier.TableEntryReference);
+                localizeStringEvent.RefreshString();
             }
             else
             {
-                //localizeStringEvent.StringReference.SetReference(null, null);
-                //localizeStringEvent.GetComponent<TextMeshProUGUI>().text = ""; // TODO Cleanup when modifiers get moved to their own UI component
+                localizeStringEvent.SetStringReference(null, new());
+                localizeStringEvent.GetComponent<TextMeshProUGUI>().text = ""; // TODO Cleanup when modifiers get moved to their own UI component
             }
         }
     }

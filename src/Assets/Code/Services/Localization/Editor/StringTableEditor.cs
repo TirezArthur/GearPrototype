@@ -34,7 +34,7 @@ public class StringTableEditor : Editor
 
         if (tableCollection == null) return;
 
-        IReadOnlyList<TableCollection.StringReference> stringReferences = tableCollection.StringReferences;
+        IReadOnlyList<StringReference> stringReferences = tableCollection.StringReferences;
 
         _scrollPosition = EditorGUILayout.BeginScrollView(_scrollPosition, GUILayout.Height(Mathf.Min(400f, stringReferences.Count * (RowHeight + 4f) + 4f)));
 

@@ -19,9 +19,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 10aca2fe551a3054e8923875074c2749, type: 2}
   - {fileID: 11400000, guid: e4f6fb1b8044a1746be40488c29ab0e8, type: 2}
   _stringReferences:
-  - String: ADD_HEALTH
-    Key: 863182181780049548
-  - String: INCREASE_HEALTH
-    Key: 8760431162256624477
-  - String: INCREASE_LEVEL
-    Key: 3425821924370979256
+  - _string: ADD_HEALTH
+    _key: 863182181780049548
+  - _string: INCREASE_HEALTH
+    _key: 8760431162256624477
+  - _string: INCREASE_LEVEL
+    _key: 3425821924370979256
+  _formattedStrings: 010101

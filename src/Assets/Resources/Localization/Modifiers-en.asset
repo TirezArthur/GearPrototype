@@ -16,5 +16,5 @@ MonoBehaviour:
   _parentCollection: {fileID: 11400000, guid: 9810545438dca264cb35b6cf55cff1a9, type: 2}
   _strings:
   - Add {Value} to maximum health
-  - Increase maximum health by {Value}
+  - '{Value}% increased maximum health'
   - Adds {Value} levels to {Skill}

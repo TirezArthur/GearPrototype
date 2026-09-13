@@ -28,15 +28,15 @@ MonoBehaviour:
       type: {class: AddHealthModifier, ns: , asm: GameCode}
       data:
         _value:
-          _value: 0
+          _value: 0.871611
     - rid: 4718670988711559367
       type: {class: IncreaseHealthModifier, ns: , asm: GameCode}
       data:
         _value:
-          _value: 0
+          _value: 0.9523002
     - rid: 4718670988711559368
       type: {class: IncreaseLevelModifier, ns: , asm: GameCode}
       data:
         _value:
-          _value: 0
-        _skill: 
+          _value: 0.8272085
+        _skill: Fireball

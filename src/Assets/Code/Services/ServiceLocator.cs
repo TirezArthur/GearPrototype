@@ -26,8 +26,11 @@ public class Service : MonoBehaviour
 public static class ServiceLocator
 {
     private static Dictionary<Type, Component> _services = new();
+    private static bool _initialized = false;
 
-    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterAssembliesLoaded)]
+    public static bool Initialized => _initialized;
+
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     private static void Setup()
     {
         _services.Clear();
@@ -40,10 +43,11 @@ public static class ServiceLocator
         foreach (Type service in serviceTypes)
         {
             if (service.IsGenericType || service.IsAbstract) continue; // Only consider actual implementations, not abstract classes
-            if (!service.IsSealed) throw new InvalidOperationException("Service has to be a sealed class");
 
             try
             {
+                if (!service.IsSealed) throw new InvalidOperationException("Service has to be a sealed class");
+
                 GameObject serviceObject = new GameObject(service.Name);
                 GameObject.DontDestroyOnLoad(serviceObject);
                 Component serviceComponent = serviceObject.AddComponent(service);
@@ -72,6 +76,7 @@ public static class ServiceLocator
                 _services.Remove(serviceType);
             }
         }
+        _initialized = true;
     }
 
     public static Service GetService(Type serviceType)

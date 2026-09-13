@@ -4,17 +4,17 @@ using Random = Unity.Mathematics.Random;
 
 public interface IItemModifier : ISerializationCallbackReceiver
 {
-    public long TableEntryReference { get; }
+    public StringReference TableEntryReference { get; }
     public void Randomize(ref Random random);
 }
 
 [Serializable]
 public struct AddHealthModifier : IItemModifier
 {
-    public const long _tableEntryReference = 19054575616; //LocalizationSettings.StringDatabase.GetTableEntry(IItemModifier.TableReference, "ADD_HEALTH").Entry.KeyId;
+    public static readonly StringReference _stringReference = new("ADD_HEALTH");
     [SerializeField] private IntModifierValue _value;
 
-    public readonly long TableEntryReference => _tableEntryReference;
+    public readonly StringReference TableEntryReference => _stringReference;
     public int Value => _value.Value;
 
     public void Randomize(ref Random random)
@@ -34,10 +34,10 @@ public struct AddHealthModifier : IItemModifier
 [Serializable]
 public struct IncreaseHealthModifier : IItemModifier
 {
-    public const long _tableEntryReference = 78030684160; //LocalizationSettings.StringDatabase.GetTableEntry(IItemModifier.TableReference, "INCREASE_HEALTH").Entry.KeyId;
+    public static readonly StringReference _stringReference = new("INCREASE_HEALTH");
     [SerializeField] private PercentModifierValue _value;
 
-    public readonly long TableEntryReference => _tableEntryReference;
+    public readonly StringReference TableEntryReference => _stringReference;
     public int Value => _value.Value;
 
     public void Randomize(ref Random random)
@@ -57,11 +57,11 @@ public struct IncreaseHealthModifier : IItemModifier
 [Serializable]
 public struct IncreaseLevelModifier : IItemModifier
 {
-    public const long _tableEntryReference = 230325862400; //LocalizationSettings.StringDatabase.GetTableEntry(IItemModifier.TableReference, "INCREASE_SKILL_LVL").Entry.KeyId;
+    public static readonly StringReference _stringReference = new("INCREASE_LEVEL");
     [SerializeField] private IntModifierValue _value;
     [SerializeField] private string _skill;
 
-    public long TableEntryReference => _tableEntryReference;
+    public readonly StringReference TableEntryReference => _stringReference;
     public int Value => _value.Value;
     public string Skill => _skill;
 
