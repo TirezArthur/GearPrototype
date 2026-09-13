@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08fd9abed07d8054dbf75ab81f38763b, type: 3}
+  m_Name: Modifiers-nl
+  m_EditorClassIdentifier: GameCode::StringTable
+  _locale: {fileID: 11400000, guid: bab3a7db84387f84a845ade1ace17af5, type: 2}
+  _parentCollection: {fileID: 11400000, guid: 9810545438dca264cb35b6cf55cff1a9, type: 2}
+  _strings:
+  - Dutch
+  - Dutch
+  - Dutch

@@ -1,7 +1,6 @@
 using System;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Localization.Components;
 using UnityEngine.UI;
 
 public class ItemDescriptionUI : MonoBehaviour
@@ -10,7 +9,7 @@ public class ItemDescriptionUI : MonoBehaviour
     [Header("References")]
     [SerializeField] private Image _border;
     [SerializeField] private VerticalLayoutGroup _margin;
-    [SerializeField] private LocalizeStringEvent[] _modifiers = new LocalizeStringEvent[3];
+    [SerializeField] private TextMeshProUGUI[] _modifiers = new TextMeshProUGUI[3];
 
     public void SetItem(Item item)
     {
@@ -20,19 +19,19 @@ public class ItemDescriptionUI : MonoBehaviour
 
         for (int modifierIndex = 0; modifierIndex < _modifiers.Length; modifierIndex++)
         {
-            LocalizeStringEvent localizeStringEvent = _modifiers[modifierIndex];
+            //LocalizeStringEvent localizeStringEvent = _modifiers[modifierIndex];
             IItemModifier modifier = modifierIndex < item.Modifiers.Length ? item.Modifiers[modifierIndex] : null;
 
             if (modifier != null)
             {
-                localizeStringEvent.StringReference.Arguments = new[] { modifier };
-                localizeStringEvent.StringReference.SetReference(IItemModifier.TableReference, modifier.TableEntryReference);
-                localizeStringEvent.RefreshString();
+                //localizeStringEvent.StringReference.Arguments = new[] { modifier };
+                //localizeStringEvent.StringReference.SetReference(IItemModifier.TableReference, modifier.TableEntryReference);
+                //localizeStringEvent.RefreshString();
             }
             else
             {
-                localizeStringEvent.StringReference.SetReference(null, null);
-                localizeStringEvent.GetComponent<TextMeshProUGUI>().text = ""; // TODO Cleanup when modifiers get moved to their own UI component
+                //localizeStringEvent.StringReference.SetReference(null, null);
+                //localizeStringEvent.GetComponent<TextMeshProUGUI>().text = ""; // TODO Cleanup when modifiers get moved to their own UI component
             }
         }
     }

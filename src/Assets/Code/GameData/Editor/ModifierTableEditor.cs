@@ -4,7 +4,6 @@ using UnityEditor;
 using UnityEditor.IMGUI.Controls;
 using UnityEditorInternal;
 using UnityEngine;
-using UnityEngine.Localization.PropertyVariants.TrackedProperties;
 
 [CustomEditor(typeof(ModifierTable))]
 public class ModifierTableEditor : Editor
@@ -46,8 +45,7 @@ public class ModifierTableEditor : Editor
 
     private void DrawElement(Rect rect, int index, bool isActive, bool isFocused)
     {
-        if (index >= _weightsProp.arraySize || index >= _modifiersProp.arraySize)
-            return;
+        if (index >= _weightsProp.arraySize || index >= _modifiersProp.arraySize) return;
 
         rect.height = EditorGUIUtility.singleLineHeight;
 

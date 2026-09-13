@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e3467b92b468124195ea0f4f4b17bae, type: 3}
+  m_Name: Modifiers
+  m_EditorClassIdentifier: GameCode::TableCollection
+  _locales:
+  - {fileID: 11400000, guid: 0fb21af3f28f3e247bc67db490015eae, type: 2}
+  - {fileID: 11400000, guid: bab3a7db84387f84a845ade1ace17af5, type: 2}
+  _stringTables:
+  - {fileID: 11400000, guid: 10aca2fe551a3054e8923875074c2749, type: 2}
+  - {fileID: 11400000, guid: e4f6fb1b8044a1746be40488c29ab0e8, type: 2}
+  _stringReferences:
+  - String: ADD_HEALTH
+    Key: 863182181780049548
+  - String: INCREASE_HEALTH
+    Key: 8760431162256624477
+  - String: INCREASE_LEVEL
+    Key: 3425821924370979256

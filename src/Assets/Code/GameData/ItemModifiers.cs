@@ -1,12 +1,9 @@
 using System;
 using UnityEngine;
-using UnityEngine.Localization.Settings;
-using UnityEngine.Localization.Tables;
 using Random = Unity.Mathematics.Random;
 
 public interface IItemModifier : ISerializationCallbackReceiver
 {
-    public static TableReference TableReference => "ModifierList";
     public long TableEntryReference { get; }
     public void Randomize(ref Random random);
 }
